@@ -52,9 +52,7 @@ pipeline {
         stage('Run Script') {
             steps {
                 script {
-                    // Run your script here
-                    // Example: sh 'bash scripts-repo/OSUOSL-Jenkins/Tensorflow/build_envoy.sh'
-					sh 'pwd'
+                    sh 'pwd'
 					sh 'ls -l'
                     sh 'ls -la scripts-repo/OSUOSL-Jenkins/'
                     sh 'ls -l scripts-repo/OSUOSL-Jenkins/Envoy'
