@@ -52,7 +52,7 @@ pipeline {
                 script {
                     // Run your script here
                     // Example: sh 'bash scripts-repo/BoringSSL/your-script.sh'
-                    echo 'Ready to run scripts from BoringSSL folder'
+                    echo 'Inside Tensorflow folder! Ready to run scripts from BoringSSL folder'
                     sh 'ls -la scripts-repo/BoringSSL/'
                 }
             }
