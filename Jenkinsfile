@@ -58,6 +58,7 @@ pipeline {
                     sh 'ls -l scripts-repo/Tensorflow/2.20.0/'
                     sh 'cp scripts-repo/Tensorflow/2.20.0//build_tensorflow.sh .'
 					sh 'cp -r scripts-repo/Tensorflow/2.20.0/patch .'
+					sh 'ls -l'
 					//sh 'bash build_tensorflow.sh -y'
                 }
             }
