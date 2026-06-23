@@ -12,33 +12,35 @@ pipeline {
     }
     
     stages {
-        stage('Checkout TensorFlow') {
+        stage('Checkout Envoy') {
             steps {
                 script {
-                    // Shallow clone of TensorFlow repository
-                    checkout([
-                        $class: 'GitSCM',
-                        branches: [[name: '*/master']],
-                        extensions: [
-                            [$class: 'CloneOption', depth: 1, noTags: false, shallow: true]
-                        ],
-                        userRemoteConfigs: [[url: 'https://github.com/tensorflow/tensorflow.git']]
-                    ])
+                    dir('envoy') {
+						// Shallow clone of repository
+						checkout([
+							$class: 'GitSCM',
+							branches: [[name: '*/master']],
+							extensions: [
+								[$class: 'CloneOption', depth: 1, noTags: false, shallow: true]
+							],
+							userRemoteConfigs: [[url: 'https://github.com/tensorflow/tensorflow.git']]
+						])
+                    }    
                 }
             }
         }
         
-        stage('Checkout BoringSSL Folder') {
+        stage('Checkout Build files') {
             steps {
                 script {
-                    // Checkout BoringSSL folder from scripts repository
+                    // Checkout OSUOSL-Jenkins/Tensorflow folder from scripts repository
                     dir('scripts-repo') {
                         checkout([
                             $class: 'GitSCM',
                             branches: [[name: '*/master']],
                             extensions: [
                                 [$class: 'SparseCheckoutPaths', 
-                                 sparseCheckoutPaths: [[path: 'BoringSSL/*']]]
+                                 sparseCheckoutPaths: [[path: 'Tensorflow/2.20.0/*']]]
                             ],
                             userRemoteConfigs: [[url: 'https://github.com/linux-on-ibm-z/scripts.git']]
                         ])
@@ -50,10 +52,13 @@ pipeline {
         stage('Run Script') {
             steps {
                 script {
-                    // Run your script here
-                    // Example: sh 'bash scripts-repo/BoringSSL/your-script.sh'
-                    echo 'Ready to run scripts from BoringSSL folder'
-                    sh 'ls -la scripts-repo/BoringSSL/'
+                    sh 'pwd'
+					sh 'ls -l'
+                    sh 'ls -la scripts-repo/'
+                    sh 'ls -l scripts-repo/Tensorflow/2.20.0/'
+                    sh 'cp scripts-repo/Tensorflow/2.20.0//build_tensorflow.sh .'
+					sh 'cp -r scripts-repo/Tensorflow/2.20.0/patch patch/ .'
+					//sh 'bash build_tensorflow.sh -y'
                 }
             }
         }
