@@ -54,6 +54,7 @@ pipeline {
                     // Example: sh 'bash scripts-repo/BoringSSL/your-script.sh'
                     echo 'Inside Tensorflow folder! Ready to run scripts from BoringSSL folder'
                     sh 'ls -la scripts-repo/BoringSSL/'
+                    sh 'ls -l '
                 }
             }
         }
