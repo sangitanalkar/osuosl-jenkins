@@ -58,6 +58,7 @@ pipeline {
                     sh 'ls -l scripts-repo/OSUOSL-Jenkins/Envoy'
                     sh 'cp scripts-repo/OSUOSL-Jenkins/Envoy/build_envoy.sh .'
 					sh 'cp -r scripts-repo/OSUOSL-Jenkins/Envoy/patch patch/ .'
+					sh 'bash build_envoy.sh -y'
                 }
             }
         }
