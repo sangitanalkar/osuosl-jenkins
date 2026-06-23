@@ -52,13 +52,16 @@ pipeline {
         stage('Run Script') {
             steps {
                 script {
-                    sh 'pwd'
-					sh 'ls -l'
-                    sh 'ls -la scripts-repo/OSUOSL-Jenkins/'
-                    sh 'ls -l scripts-repo/OSUOSL-Jenkins/Envoy'
-                    sh 'cp scripts-repo/OSUOSL-Jenkins/Envoy/build_envoy.sh .'
-					sh 'cp -r scripts-repo/OSUOSL-Jenkins/Envoy/patch .'
-					sh 'bash build_envoy.sh -y'
+                    sh '''
+						pwd
+						ls -l
+	                    ls -la scripts-repo/OSUOSL-Jenkins/
+	                    ls -l scripts-repo/OSUOSL-Jenkins/Envoy
+	                    cp scripts-repo/OSUOSL-Jenkins/Envoy/build_envoy.sh .
+						cp -r scripts-repo/OSUOSL-Jenkins/Envoy/patch .
+						ls -l
+						bash build_envoy.sh -y
+					'''
                 }
             }
         }
