@@ -31,14 +31,14 @@ pipeline {
         stage('Checkout BoringSSL Folder') {
             steps {
                 script {
-                    // Checkout BoringSSL folder from scripts repository
+                    // Checkout OSUOSL-Jenkins/Tensorflow folder from scripts repository
                     dir('scripts-repo') {
                         checkout([
                             $class: 'GitSCM',
                             branches: [[name: '*/master']],
                             extensions: [
                                 [$class: 'SparseCheckoutPaths', 
-                                 sparseCheckoutPaths: [[path: 'BoringSSL/*']]]
+                                 sparseCheckoutPaths: [[path: 'OSUOSL-Jenkins/Tensorflow/*']]]
                             ],
                             userRemoteConfigs: [[url: 'https://github.com/linux-on-ibm-z/scripts.git']]
                         ])
@@ -51,10 +51,18 @@ pipeline {
             steps {
                 script {
                     // Run your script here
-                    // Example: sh 'bash scripts-repo/BoringSSL/your-script.sh'
-                    echo 'Inside Tensorflow folder! Ready to run scripts from BoringSSL folder'
-                    sh 'ls -la scripts-repo/BoringSSL/'
-                    sh 'ls -l '
+                    // Example: sh 'bash scripts-repo/OSUOSL-Jenkins/Tensorflow/build_envoy.sh'
+                    echo 'Ready to run scripts from Tensorflow folder'
+                    sh 'ls -la scripts-repo/Envoy/'
+                    sh 'ls -l scripts-repo/Envoy/1.36.3'
+                    
+
+
+                    
+                    //echo 'Ready to run scripts from Tensorflow folder'
+                    //sh 'ls -la scripts-repo/OSUOSL-Jenkins/'
+                    //sh 'ls -l scripts-repo/OSUOSL-Jenkins/Tensorflow'
+                    //sh 'bash scripts-repo/OSUOSL-Jenkins/Tensorflow/build_envoy.sh'
                 }
             }
         }
