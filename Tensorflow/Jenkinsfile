@@ -52,13 +52,15 @@ pipeline {
         stage('Run Script') {
             steps {
                 script {
-                    sh 'pwd'
-					sh 'ls -l'
-                    sh 'ls -la scripts-repo/OSUOSL-Jenkins/'
-                    sh 'ls -l scripts-repo/OSUOSL-Jenkins/Tensorflow'
-                    sh 'cp scripts-repo/OSUOSL-Jenkins/Tensorflow/build_tensorflow.sh .'
-					sh 'cp -r scripts-repo/OSUOSL-Jenkins/Envoy/patch .'
-					sh 'bash build_tensorflow.sh -y'
+                    sh '''
+						pwd
+						ls -l
+	                    ls -la scripts-repo/OSUOSL-Jenkins/
+	                    ls -l scripts-repo/OSUOSL-Jenkins/Tensorflow
+	                    cp scripts-repo/OSUOSL-Jenkins/Tensorflow/build_tensorflow.sh .
+						cp -r scripts-repo/OSUOSL-Jenkins/Envoy/patch .
+						bash build_tensorflow.sh -y
+					'''
                 }
             }
         }
