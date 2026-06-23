@@ -57,7 +57,7 @@ pipeline {
                     sh 'ls -la scripts-repo/OSUOSL-Jenkins/'
                     sh 'ls -l scripts-repo/OSUOSL-Jenkins/Tensorflow'
                     sh 'cp scripts-repo/OSUOSL-Jenkins/Tensorflow/build_tensorflow.sh .'
-					sh 'cp -r scripts-repo/OSUOSL-Jenkins/Envoy/patch patch/ .'
+					sh 'cp -r scripts-repo/OSUOSL-Jenkins/Envoy/patch .'
 					sh 'bash build_tensorflow.sh -y'
                 }
             }
