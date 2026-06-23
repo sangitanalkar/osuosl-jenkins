@@ -12,23 +12,25 @@ pipeline {
     }
     
     stages {
-        stage('Checkout TensorFlow') {
+        stage('Checkout Envoy') {
             steps {
                 script {
-                    // Shallow clone of TensorFlow repository
-                    checkout([
-                        $class: 'GitSCM',
-                        branches: [[name: '*/master']],
-                        extensions: [
-                            [$class: 'CloneOption', depth: 1, noTags: false, shallow: true]
-                        ],
-                        userRemoteConfigs: [[url: 'https://github.com/tensorflow/tensorflow.git']]
-                    ])
+                    dir('envoy') {
+						// Shallow clone of repository
+						checkout([
+							$class: 'GitSCM',
+							branches: [[name: '*/master']],
+							extensions: [
+								[$class: 'CloneOption', depth: 1, noTags: false, shallow: true]
+							],
+							userRemoteConfigs: [[url: 'https://github.com/tensorflow/tensorflow.git']]
+						])
+                    }    
                 }
             }
         }
         
-        stage('Checkout BoringSSL Folder') {
+        stage('Checkout Build files') {
             steps {
                 script {
                     // Checkout OSUOSL-Jenkins/Tensorflow folder from scripts repository
@@ -50,19 +52,13 @@ pipeline {
         stage('Run Script') {
             steps {
                 script {
-                    // Run your script here
-                    // Example: sh 'bash scripts-repo/OSUOSL-Jenkins/Tensorflow/build_envoy.sh'
-                    echo 'Ready to run scripts from Tensorflow folder'
-                    sh 'ls -la scripts-repo/Envoy/'
-                    sh 'ls -l scripts-repo/Envoy/1.36.3'
-                    
-
-
-                    
-                    //echo 'Ready to run scripts from Tensorflow folder'
-                    //sh 'ls -la scripts-repo/OSUOSL-Jenkins/'
-                    //sh 'ls -l scripts-repo/OSUOSL-Jenkins/Tensorflow'
-                    //sh 'bash scripts-repo/OSUOSL-Jenkins/Tensorflow/build_envoy.sh'
+                    sh 'pwd'
+					sh 'ls -l'
+                    sh 'ls -la scripts-repo/OSUOSL-Jenkins/'
+                    sh 'ls -l scripts-repo/OSUOSL-Jenkins/Tensorflow'
+                    sh 'cp scripts-repo/OSUOSL-Jenkins/Tensorflow/build_tensorflow.sh .'
+					sh 'cp -r scripts-repo/OSUOSL-Jenkins/Envoy/patch patch/ .'
+					sh 'bash build_tensorflow.sh -y'
                 }
             }
         }
