@@ -52,14 +52,15 @@ pipeline {
         stage('Run Script') {
             steps {
                 script {
-                    sh 'pwd'
-					sh 'ls -l'
-                    sh 'ls -la scripts-repo/'
-                    sh 'ls -l scripts-repo/Tensorflow/2.20.0/'
-                    sh 'cp scripts-repo/Tensorflow/2.20.0//build_tensorflow.sh .'
-					sh 'cp -r scripts-repo/Tensorflow/2.20.0/patch .'
-					sh 'ls -l'
-					//sh 'bash build_tensorflow.sh -y'
+                    sh '''
+					pwd
+					ls -l
+                    ls -la scripts-repo/
+                    ls -l scripts-repo/Tensorflow/2.20.0/
+                    cp scripts-repo/Tensorflow/2.20.0//build_tensorflow.sh .
+					cp -r scripts-repo/Tensorflow/2.20.0/patch .
+					ls -l
+					'''
                 }
             }
         }
