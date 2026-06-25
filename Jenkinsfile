@@ -7,7 +7,7 @@ pipeline {
     agent {
         docker {
             image 'osuosl/ubuntu-s390x:22.04'
-            label 's390x-docker1'
+            label 's390x-docker2'
         }
     }
     
